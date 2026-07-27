@@ -1,5 +1,7 @@
 {
   "activities_v2": null,
   "itinerary": null,
-  "attendees": null
+  "attendees": [
+    "aa"
+  ]
 }
