@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Springs '26 — The Weekend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#1c3d2e;
+    --pine-dark:#132a20;
+    --stone:#efe9db;
+    --card:#f8f5ec;
+    --brass:#b8923f;
+    --clay:#a8462f;
+    --charcoal:#24211c;
+    --sage:#6b7d5e;
+    --line:#cbbfa0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--stone);
+    color:var(--charcoal);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ---------- Header ---------- */
+  header{
+    background:var(--pine);
+    background-image:
+      repeating-radial-gradient(circle at 15% 20%, transparent 0, transparent 18px, rgba(255,255,255,0.035) 19px, transparent 20px, transparent 40px),
+      repeating-radial-gradient(circle at 85% 75%, transparent 0, transparent 24px, rgba(255,255,255,0.03) 25px, transparent 26px, transparent 50px);
+    color:var(--stone);
+    padding:44px 20px 34px;
+    position:relative;
+    overflow:hidden;
+  }
+  header .wrap{padding:0;}
+  .eyebrow{
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--brass);font-weight:600;margin-bottom:10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:clamp(30px,5vw,46px);
+    line-height:1.05;
+    margin:0 0 10px;
+    letter-spacing:-0.01em;
+  }
+  .sub{
+    font-size:15px;
+    color:#cdd9cf;
+    max-width:520px;
+    line-height:1.5;
+  }
+  .dates-row{
+    display:flex;gap:18px;margin-top:22px;flex-wrap:wrap;
+  }
+  .date-pill{
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:3px;
+    padding:8px 14px;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.03em;
+    color:var(--stone);
+  }
+  .date-pill b{color:var(--brass);font-weight:700;}
+  .hotel-pricing{margin-top:26px;}
+  .hp-title{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);font-weight:700;margin-bottom:10px;}
+  .hp-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:640px){.hp-cards{grid-template-columns:1fr;}}
+  .hp-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);border-radius:5px;padding:14px 16px;}
+  .hp-name{font-family:'Fraunces',serif;font-size:15.5px;font-weight:600;color:var(--stone);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .hp-badge{font-family:'Inter',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--sage);color:#fff;padding:3px 7px;border-radius:3px;}
+  .hp-badge.gold{background:var(--brass);}
+  .hp-rate{font-family:'Fraunces',serif;font-size:24px;font-weight:700;color:#fff;margin:6px 0 4px;}
+  .hp-rate span{font-family:'Inter',sans-serif;font-size:11.5px;font-weight:500;color:#b9c7bc;margin-left:4px;}
+  .hp-note{font-size:11.5px;color:#cdd9cf;line-height:1.5;}
+  .hp-fine{font-size:10.5px;color:#93a698;margin-top:10px;line-height:1.5;}
+
+
+  /* ---------- Tabs ---------- */
+  .tabs{
+    display:flex;gap:2px;margin-top:28px;
+    border-bottom:2px solid var(--line);
+  }
+  .tab-btn{
+    font-family:'Inter',sans-serif;
+    background:none;border:none;cursor:pointer;
+    font-size:14px;font-weight:600;color:#8a8272;
+    padding:14px 4px;margin-right:26px;
+    position:relative;top:2px;
+    border-bottom:2px solid transparent;
+    transition:color .15s;
+  }
+  .tab-btn.active{color:var(--pine);border-bottom:2px solid var(--clay);}
+  .tab-btn:hover{color:var(--pine);}
+
+  .panel{display:none;padding-top:26px;}
+  .panel.active{display:block;}
+
+  /* ---------- Name gate ---------- */
+  .gate-overlay{
+    position:fixed;inset:0;background:rgba(19,42,32,0.92);
+    display:flex;align-items:center;justify-content:center;z-index:50;
+    padding:20px;
+  }
+  .gate-card{
+    background:var(--card);border-radius:6px;padding:32px 30px;max-width:380px;width:100%;
+    box-shadow:0 20px 50px rgba(0,0,0,0.3);
+  }
+  .gate-card h2{font-family:'Fraunces',serif;margin:0 0 6px;font-size:22px;color:var(--pine);}
+  .gate-card p{font-size:13.5px;color:#665f4f;margin:0 0 18px;line-height:1.5;}
+  .gate-card input{
+    width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:4px;
+    font-size:15px;font-family:'Inter',sans-serif;margin-bottom:12px;
+  }
+  .gate-card input:focus{outline:none;border-color:var(--clay);}
+  .btn-primary{
+    background:var(--clay);color:#fff;border:none;border-radius:4px;
+    padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;width:100%;
+    font-family:'Inter',sans-serif;transition:background .15s;
+  }
+  .btn-primary:hover{background:#8f3a26;}
+  .gate-err{color:var(--clay);font-size:12.5px;margin-top:-4px;margin-bottom:10px;display:none;}
+
+  /* ---------- Section headers ---------- */
+  .section-head{margin-bottom:18px;}
+  .section-head h2{font-family:'Fraunces',serif;font-size:22px;margin:0 0 4px;color:var(--pine);}
+  .section-head p{font-size:13.5px;color:#665f4f;margin:0;max-width:560px;line-height:1.5;}
+
+  /* ---------- Activity cards (scorecard style) ---------- */
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 20px;}
+  .chip{
+    font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;
+    border:1.5px solid var(--line);background:transparent;cursor:pointer;color:#6b6350;
+  }
+  .chip.active{background:var(--pine);border-color:var(--pine);color:#fff;}
+
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+  .a-card{
+    background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:16px 16px 14px;position:relative;display:flex;flex-direction:column;
+    min-height:190px;
+  }
+  .a-card.confirmed{border:1.5px solid var(--brass);box-shadow:0 0 0 3px rgba(184,146,63,0.12);}
+  .a-card .tag{
+    display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:3px 8px;border-radius:3px;margin-bottom:10px;width:fit-content;
+  }
+  .tag-golf{background:#e4dcc4;color:#7a6320;}
+  .tag-adrenaline{background:#f0dad2;color:var(--clay);}
+  .tag-chill{background:#dfe6d8;color:var(--sage);}
+  .tag-drink{background:#e9dde4;color:#7d3d5c;}
+  .tag-games{background:#e2e6d1;color:#5a6b3a;}
+
+  .a-card h3{font-family:'Fraunces',serif;font-size:17px;margin:0 0 6px;line-height:1.2;color:var(--charcoal);}
+  .meta-line{font-size:11.5px;color:#7a7360;font-weight:600;margin-bottom:3px;}
+  .meta-line:last-of-type{margin-bottom:8px;}
+  .a-card .desc{font-size:12.5px;color:#6b6350;line-height:1.5;flex-grow:1;margin-bottom:12px;}
+  .a-card .card-foot{
+    display:flex;align-items:center;justify-content:space-between;
+    border-top:1px dashed var(--line);padding-top:10px;
+  }
+  .votes{font-size:12.5px;color:#8a8272;font-weight:600;}
+  .votes b{color:var(--pine);font-size:14px;}
+  .vote-btn{
+    border:1.5px solid var(--pine);background:none;color:var(--pine);
+    font-size:12px;font-weight:700;border-radius:4px;padding:6px 12px;cursor:pointer;
+  }
+  .vote-btn.voted{background:var(--pine);color:#fff;}
+  .lock-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;}
+  .lock-btn{
+    font-size:11px;color:#8a8272;background:none;border:none;cursor:pointer;font-weight:600;
+    text-decoration:underline;padding:0;
+  }
+  .lock-btn.on{color:var(--brass);}
+  .ribbon{
+    position:absolute;top:-8px;right:14px;background:var(--brass);color:#fff;
+    font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    padding:4px 9px;border-radius:3px;
+  }
+  .add-day-select{
+    font-size:11.5px;border:1px solid var(--line);border-radius:4px;padding:5px 6px;
+    background:#fff;color:var(--charcoal);
+  }
+
+  .suggest-box{
+    margin-top:22px;border:1.5px dashed var(--line);border-radius:6px;padding:16px;
+    display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  }
+  .suggest-box input{
+    flex:1;min-width:180px;padding:9px 11px;border:1.5px solid var(--line);border-radius:4px;font-size:13.5px;
+  }
+  .suggest-box select{padding:9px 8px;border:1.5px solid var(--line);border-radius:4px;font-size:13px;}
+  .btn-sm{
+    background:var(--pine);color:#fff;border:none;border-radius:4px;padding:9px 16px;
+    font-size:13px;font-weight:600;cursor:pointer;
+  }
+
+  /* ---------- Itinerary ---------- */
+  .day-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:800px){.day-cols{grid-template-columns:1fr;}}
+  .day-col{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px;min-height:120px;}
+  .day-col h3{font-family:'Fraunces',serif;margin:0 0 3px;color:var(--pine);font-size:17px;}
+  .day-col .day-date{font-size:11.5px;color:#8a8272;margin-bottom:12px;font-weight:600;}
+  .item-row{
+    border-bottom:1px dashed var(--line);padding:9px 0;display:flex;gap:8px;align-items:flex-start;
+  }
+  .item-row:last-of-type{border-bottom:none;}
+  .item-time{font-size:11.5px;font-weight:700;color:var(--brass);min-width:52px;padding-top:1px;}
+  .item-body{flex:1;}
+  .item-title{font-size:13.5px;font-weight:600;color:var(--charcoal);}
+  .item-note{font-size:11.5px;color:#8a8272;margin-top:2px;}
+  .item-del{background:none;border:none;color:#c0b8a0;cursor:pointer;font-size:15px;line-height:1;padding:2px;}
+  .item-del:hover{color:var(--clay);}
+  .empty-day{font-size:12px;color:#a39c88;font-style:italic;padding:6px 0;}
+  .add-item-form{margin-top:12px;display:flex;flex-direction:column;gap:6px;}
+  .add-item-form input{
+    padding:7px 9px;border:1px solid var(--line);border-radius:4px;font-size:12.5px;
+  }
+  .add-item-form button{
+    background:var(--sage);color:#fff;border:none;border-radius:4px;padding:7px;font-size:12px;font-weight:600;cursor:pointer;
+  }
+
+  /* ---------- Who's in ---------- */
+  .attendee-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .attendee-pill{
+    background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:8px 16px;font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:8px;
+  }
+  .attendee-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--sage);}
+
+  .loading-note{font-size:13px;color:#8a8272;padding:20px 0;}
+
+  /* ---------- Fable AI ---------- */
+  .ai-bar{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
+  .ai-gen-btn{width:auto;background:var(--pine);}
+  .ai-gen-btn:hover{background:var(--pine-dark);}
+  .ai-gen-btn:disabled{opacity:.6;cursor:wait;}
+  .ai-status{font-size:12.5px;color:#8a8272;font-style:italic;}
+  .chat-box{
+    background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:16px;min-height:220px;max-height:420px;overflow-y:auto;
+    display:flex;flex-direction:column;gap:10px;margin-bottom:12px;
+  }
+  .chat-msg{
+    font-size:13.5px;line-height:1.55;padding:10px 14px;border-radius:6px;max-width:85%;
+    white-space:pre-wrap;
+  }
+  .chat-msg.user{background:var(--pine);color:#fff;align-self:flex-end;}
+  .chat-msg.ai{background:#fff;border:1px solid var(--line);align-self:flex-start;}
+  .chat-msg.thinking{color:#8a8272;font-style:italic;background:transparent;border:none;padding:4px 2px;}
+  .chat-input-row{display:flex;gap:8px;}
+  .chat-input-row input{
+    flex:1;padding:11px 12px;border:1.5px solid var(--line);border-radius:4px;font-size:13.5px;
+    font-family:'Inter',sans-serif;
+  }
+  .chat-input-row input:focus{outline:none;border-color:var(--pine);}
+
+  /* ---------- Mobile ---------- */
+  input, select, textarea{font-size:16px !important;} /* stops iOS zoom-on-focus */
+  @media (max-width:640px){
+    header{padding:30px 18px 24px;}
+    h1{font-size:32px;}
+    .sub{font-size:14px;}
+    .wrap{padding:0 14px 60px;}
+    .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-wrap:nowrap;}
+    .tabs::-webkit-scrollbar{display:none;}
+    .tab-btn{white-space:nowrap;margin-right:18px;padding:14px 2px;font-size:13.5px;flex-shrink:0;}
+    .card-grid{grid-template-columns:1fr;}
+    .a-card{min-height:0;}
+    .vote-btn{padding:10px 18px;font-size:13px;}
+    .lock-btn{padding:8px 0;}
+    .chip{padding:8px 14px;}
+    .hp-rate{font-size:21px;}
+    .suggest-box{flex-direction:column;align-items:stretch;}
+    .suggest-box input,.suggest-box select,.suggest-box .btn-sm{width:100%;}
+    .btn-sm{padding:12px 16px;}
+    .gate-card{padding:26px 22px;}
+    .item-time{min-width:60px;}
+    .add-item-form button{padding:11px;}
+    .attendee-pill{padding:10px 16px;}
+    .sync-bar{gap:8px;}
+  }
+  footer{text-align:center;font-size:11.5px;color:#a39c88;padding:30px 0 0;}
+</style>
+</head>
+<body>
+
+<div id="gate" class="gate-overlay">
+  <div class="gate-card">
+    <h2>Who's this?</h2>
+    <p>Drop your name in so the crew knows who's voted and who's confirmed for Crystal Springs, Aug 14–16.</p>
+    <input id="nameInput" type="text" placeholder="First name" maxlength="30" />
+    <div class="gate-err" id="gateErr">Type a name first.</div>
+    <button class="btn-primary" onclick="joinCrew()">I'm in</button>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Bachelor Weekend</div>
+    <h1>Crystal Springs, NJ</h1>
+    <div class="sub">Twelve of us, one mountain, six golf courses, and no idea yet what we're actually doing. Vote on activities, ask the AI concierge anything, and let it draft the itinerary once the group agrees.</div>
+    <div class="dates-row">
+      <div class="date-pill">Fri <b>Aug 14</b></div>
+      <div class="date-pill">Sat <b>Aug 15</b></div>
+      <div class="date-pill">Sun <b>Aug 16</b></div>
+    </div>
+    <div class="hotel-pricing">
+      <div class="hp-title">Where we're sleeping — Airbnb vs. staying on property</div>
+      <div class="hp-cards">
+        <div class="hp-card">
+          <div class="hp-name">Airbnb House <span class="hp-badge">Whole crew, one roof</span></div>
+          <div class="hp-rate">$2,000<span>total / 3 nights</span></div>
+          <div class="hp-note">Split 12 ways that’s ~$167/person for the whole weekend (~$56/night). One kitchen, one hangout spot, pregame HQ before heading to the resort.</div>
+        </div>
+        <div class="hp-card">
+          <div class="hp-name">Grand Cascades Lodge <span class="hp-badge gold">Nicer + golf at door</span></div>
+          <div class="hp-rate">~$450–600<span>/room/night</span></div>
+          <div class="hp-note">AAA 4-Diamond, Wild Turkey &amp; Crystal Springs courses on-site, Biosphere pool. ~$75–100/person/night doubled up.</div>
+        </div>
+      </div>
+      <div class="hp-fine">Lodge rates are summer-weekend estimates (book at crystalgolfresort.com / 855.977.6473, check-in 4 PM). Heads up: on-property perks like pools, firepits, and included activities are for hotel guests — with the Airbnb we pay as we go at the resort.</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="vote" onclick="showTab('vote')">Vote on Activities</button>
+    <button class="tab-btn" data-tab="itinerary" onclick="showTab('itinerary')">Build the Itinerary</button>
+    <button class="tab-btn" data-tab="crew" onclick="showTab('crew')">Who's In</button>
+    <button class="tab-btn" data-tab="concierge" onclick="showTab('concierge')">Ask the Concierge</button>
+  </div>
+
+  <!-- VOTE PANEL -->
+  <div class="panel active" id="panel-vote">
+    <div class="section-head">
+      <h2>What are we actually doing?</h2>
+      <p>Tap "I'm in" on anything you'd want to do. Highest votes float to the top. Anyone can lock in a favorite once the group's aligned — locked picks get a badge and can be dropped straight into the itinerary.</p>
+    </div>
+    <div class="filter-row" id="filterRow"></div>
+    <div class="card-grid" id="activityGrid"></div>
+
+    <div class="suggest-box">
+      <input id="suggestName" type="text" placeholder="Something we're missing? Name the idea..." />
+      <select id="suggestCat">
+        <option value="golf">Golf</option>
+        <option value="adrenaline">Adrenaline</option>
+        <option value="chill" selected>Chill</option>
+        <option value="drink">Drink</option>
+        <option value="games">Games</option>
+      </select>
+      <button class="btn-sm" onclick="addActivity()">Add idea</button>
+    </div>
+  </div>
+
+  <!-- ITINERARY PANEL -->
+  <div class="panel" id="panel-itinerary">
+    <div class="section-head">
+      <h2>The itinerary</h2>
+      <p>Once the votes are in, lay out the actual weekend here. Lock in a favorite on the Vote tab and use "Add to day" to drop it straight in, add things manually below — or let the concierge draft the whole weekend from the group's votes.</p>
+    </div>
+    <div class="ai-bar">
+      <button class="btn-primary ai-gen-btn" id="genBtn" onclick="generateItinerary()">✦ Draft the weekend from our votes</button>
+      <span class="ai-status" id="genStatus"></span>
+    </div>
+    <div class="day-cols" id="dayCols"></div>
+  </div>
+
+  <!-- CONCIERGE PANEL -->
+  <div class="panel" id="panel-concierge">
+    <div class="section-head">
+      <h2>Ask the concierge</h2>
+      <p>An AI concierge that knows what the group has voted for and what's around Crystal Springs. Ask it anything — where to eat Saturday night, what to do if it rains, how to order the day around tee times.</p>
+    </div>
+    <div class="chat-box" id="chatBox">
+      <div class="chat-msg ai">Ask me anything about the weekend — I can see the group's votes and the current itinerary.</div>
+    </div>
+    <div class="chat-input-row">
+      <input id="chatInput" type="text" placeholder="e.g. What's the best order for Saturday if we golf in the morning?" onkeydown="if(event.key==='Enter')askConcierge()" />
+      <button class="btn-sm" id="askBtn" onclick="askConcierge()">Ask</button>
+    </div>
+  </div>
+
+  <!-- CREW PANEL -->
+  <div class="panel" id="panel-crew">
+    <div class="section-head">
+      <h2>Who's confirmed</h2>
+      <p>Everyone who's checked in on this page.</p>
+    </div>
+    <div class="attendee-list" id="attendeeList"></div>
+  </div>
+
+  <footer>Crystal Springs Resort · Hamburg / Vernon, NJ</footer>
+</div>
+
+<script>
+const DAYS = [
+  {key:'fri', label:'Friday', date:'Aug 14'},
+  {key:'sat', label:'Saturday', date:'Aug 15'},
+  {key:'sun', label:'Sunday', date:'Aug 16'}
+];
+const CATS = {
+  golf:{label:'Golf', tagClass:'tag-golf'},
+  adrenaline:{label:'Adrenaline', tagClass:'tag-adrenaline'},
+  chill:{label:'Chill', tagClass:'tag-chill'},
+  drink:{label:'Drink', tagClass:'tag-drink'},
+  games:{label:'Games', tagClass:'tag-games'}
+};
+const DEFAULT_ACTIVITIES = [
+  {id:'wildturkey', name:'#1 · Wild Turkey Golf Club', cat:'golf', dist:'On property — at Grand Cascades Lodge', when:'Best: Sat 8–9 AM tee times, ~4.5 hrs', desc:'The best course we can play staying here — 7,202 yds, top-10 ranked in NJ, and its par-3 7th over the lake quarry is rated the best par-3 in the state.', votes:[], confirmed:false},
+  {id:'csgc', name:'#2 · Crystal Springs Golf Club', cat:'golf', dist:'On property — at Grand Cascades Lodge', when:'Best: Sat or Sun AM, ~4.5 hrs', desc:'Golf Digest "Top 50 Toughest in America" — winds through a limestone quarry with big elevation changes. Bring extra balls.', votes:[], confirmed:false},
+  {id:'blackbear', name:'#3 · Black Bear Golf Club', cat:'golf', dist:'~5 mi / 10 min drive', when:'Best: Fri late-afternoon 9 or Sun AM', desc:'The friendliest 18 of the three — scenic, playable for all skill levels. Good pick if the group has a wide handicap spread.', votes:[], confirmed:false},
+  {id:'minerals9', name:'Minerals 9-Hole (casual round)', cat:'golf', dist:'~3 mi / 7 min drive', when:'Best: Fri arrival day, ~1.5–2 hrs', desc:'Robert Trent Jones executive 9 — a top-12 short course in America. Perfect low-stakes warmup with drinks.', votes:[], confirmed:false},
+  {id:'skydive', name:'Skydive Sussex', cat:'adrenaline', dist:'~8 mi / 15 min drive', when:'Best: Sat AM slot, book ahead, ~3 hrs total', desc:'14,500 ft jump — the highest skydive in the Northeast. Weather-dependent, so reserve early and have a backup.', votes:[], confirmed:false},
+  {id:'zipline', name:'Mountain Creek Zip Tour', cat:'adrenaline', dist:'~5 mi / 10 min drive', when:'Best: Sat or Sun afternoon, ~2.5 hrs', desc:'Ziplines up to 1,500 ft across the mountain, a suspension bridge, and a unimog ride back up.', votes:[], confirmed:false},
+  {id:'waterpark', name:'Mountain Creek Waterpark', cat:'chill', dist:'~5 mi / 10 min drive', when:'Best: Sat 11 AM–4 PM half-day', desc:'20+ slides, wave pool, and the Tarzan Swing free-fall for anyone recovering from Friday night.', votes:[], confirmed:false},
+  {id:'brewery', name:'Angry Erik / Krogh\u2019s Brew Pub crawl', cat:'drink', dist:'~15 mi / 20–25 min drive', when:'Best: Fri or Sat 5–8 PM, need drivers', desc:'Closest craft stops — Angry Erik Brewing in Lafayette and Krogh\u2019s brewpub on Lake Mohawk in Sparta.', votes:[], confirmed:false},
+  {id:'atv', name:'ATV Off-Road Tour', cat:'adrenaline', dist:'~45–60 min drive (Poconos area)', when:'Best: full Sat afternoon, ~4 hrs w/ drive', desc:'Guided ATV tour through backcountry trails — the farthest option, so only worth it as the day\u2019s main event.', votes:[], confirmed:false},
+  {id:'tubing', name:'Delaware Water Gap river tubing', cat:'chill', dist:'~30 mi / 40 min drive', when:'Best: Sat or Sun 10 AM start, ~4 hrs w/ drive', desc:'Lazy float down the Delaware with a cooler. Slow-paced but a classic group move.', votes:[], confirmed:false},
+  {id:'archery', name:'Resort Archery & Laser Clay Shooting', cat:'games', dist:'On property — Ballyowen range', when:'Best: Fri 4–6 PM arrival activity', desc:'Included with the stay — easy competition to kick things off while everyone trickles in.', votes:[], confirmed:false},
+  {id:'hike', name:'Appalachian Trail — Stairway to Heaven', cat:'chill', dist:'~5 mi / 10 min drive', when:'Best: Sun 9–11 AM before checkout', desc:'Steep climb to Pinwheel Vista — the best view in Sussex County. About 2.5 hrs round trip.', votes:[], confirmed:false},
+  {id:'spa', name:'Reflections / Elements Spa Recovery', cat:'chill', dist:'On property', when:'Best: Sun 10 AM — the hangover slot', desc:'Two award-winning spas on property. Book treatments ahead; the pools and hot tubs need no reservation.', votes:[], confirmed:false},
+  {id:'latour', name:'Restaurant Latour Steak & Wine Night', cat:'drink', dist:'On property — Grand Cascades Lodge', when:'Best: Sat 7:30 PM, reserve now for 12', desc:'Fine-dining tasting menu with a 135,000-bottle wine cellar — the group\u2019s big night.', votes:[], confirmed:false},
+  {id:'bonfire', name:'Firepits — Cigars & S\u2019mores', cat:'chill', dist:'On property', when:'Best: Fri & Sat 9 PM onward', desc:'Drinks, cigars, and s\u2019mores at the resort firepits — the default nightcap, no reservation needed.', votes:[], confirmed:false}
+];
+
+let myName = null;
+let activities = [];
+let itinerary = {fri:[], sat:[], sun:[]};
+let attendees = [];
+let activeFilter = 'all';
+
+async function loadAll(){
+  document.getElementById('activityGrid').innerHTML = '<div class="loading-note">Loading the board...</div>';
+
+  try{
+    const profile = await window.storage.get('profile', false);
+    if(profile && profile.value){
+      myName = JSON.parse(profile.value).name;
+      document.getElementById('gate').style.display = 'none';
+    }
+  }catch(e){ /* no profile yet */ }
+
+  try{
+    const act = await window.storage.get('activities_v2', true);
+    activities = act && act.value ? JSON.parse(act.value) : DEFAULT_ACTIVITIES;
+  }catch(e){
+    activities = DEFAULT_ACTIVITIES;
+    try{ await window.storage.set('activities_v2', JSON.stringify(activities), true); }catch(e2){}
+  }
+
+  try{
+    const it = await window.storage.get('itinerary', true);
+    itinerary = it && it.value ? JSON.parse(it.value) : {fri:[], sat:[], sun:[]};
+  }catch(e){ itinerary = {fri:[], sat:[], sun:[]}; }
+
+  try{
+    const at = await window.storage.get('attendees', true);
+    attendees = at && at.value ? JSON.parse(at.value) : [];
+  }catch(e){ attendees = []; }
+
+  if(myName && !attendees.includes(myName)){
+    attendees.push(myName);
+    try{ await window.storage.set('attendees', JSON.stringify(attendees), true); }catch(e){}
+  }
+
+  renderFilters();
+  renderActivities();
+  renderItinerary();
+  renderAttendees();
+}
+
+async function joinCrew(){
+  const val = document.getElementById('nameInput').value.trim();
+  if(!val){ document.getElementById('gateErr').style.display='block'; return; }
+  myName = val;
+  try{ await window.storage.set('profile', JSON.stringify({name: myName}), false); }catch(e){}
+  document.getElementById('gate').style.display = 'none';
+  if(!attendees.includes(myName)){
+    attendees.push(myName);
+    try{ await window.storage.set('attendees', JSON.stringify(attendees), true); }catch(e){}
+  }
+  renderActivities();
+  renderAttendees();
+}
+
+function showTab(tab){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+tab).classList.add('active');
+}
+
+function renderFilters(){
+  const row = document.getElementById('filterRow');
+  const cats = ['all', ...Object.keys(CATS)];
+  row.innerHTML = cats.map(c=>{
+    const label = c==='all' ? 'All' : CATS[c].label;
+    return `<button class="chip ${activeFilter===c?'active':''}" onclick="setFilter('${c}')">${label}</button>`;
+  }).join('');
+}
+function setFilter(c){ activeFilter = c; renderFilters(); renderActivities(); }
+
+function renderActivities(){
+  const grid = document.getElementById('activityGrid');
+  let list = [...activities];
+  if(activeFilter !== 'all') list = list.filter(a=>a.cat===activeFilter);
+  list.sort((a,b)=> (b.votes.length - a.votes.length) || (b.confirmed - a.confirmed));
+  const topVotes = Math.max(0, ...activities.map(a=>a.votes.length));
+
+  grid.innerHTML = list.map(a=>{
+    const voted = myName && a.votes.includes(myName);
+    const isTop = a.votes.length===topVotes && topVotes>0;
+    const cat = CATS[a.cat] || CATS.chill;
+    const dayOptions = DAYS.map(d=>`<option value="${d.key}">${d.label}</option>`).join('');
+    return `
+      <div class="a-card ${a.confirmed?'confirmed':''}">
+        ${a.confirmed ? '<div class="ribbon">Locked in</div>' : (isTop ? '<div class="ribbon" style="background:var(--sage)">Leading</div>' : '')}
+        <span class="tag ${cat.tagClass}">${cat.label}</span>
+        <h3>${escapeHtml(a.name)}</h3>
+        ${a.dist ? `<div class="meta-line">📍 ${escapeHtml(a.dist)}</div>` : ''}
+        ${a.when ? `<div class="meta-line">🕐 ${escapeHtml(a.when)}</div>` : ''}
+        <div class="desc">${escapeHtml(a.desc)}</div>
+        <div class="card-foot">
+          <div class="votes"><b>${a.votes.length}</b> in</div>
+          <button class="vote-btn ${voted?'voted':''}" onclick="toggleVote('${a.id}')">${voted ? "You're in" : "I'm in"}</button>
+        </div>
+        <div class="lock-row">
+          <button class="lock-btn ${a.confirmed?'on':''}" onclick="toggleLock('${a.id}')">${a.confirmed ? '★ Locked' : 'Lock this in'}</button>
+          ${a.confirmed ? `<select class="add-day-select" onchange="addToDay('${a.id}', this.value); this.selectedIndex=0;">
+            <option value="">Add to day...</option>${dayOptions}
+          </select>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+async function toggleVote(id){
+  if(!myName){ document.getElementById('gate').style.display='flex'; return; }
+  const a = activities.find(x=>x.id===id);
+  if(!a) return;
+  const idx = a.votes.indexOf(myName);
+  if(idx>=0) a.votes.splice(idx,1); else a.votes.push(myName);
+  renderActivities();
+  try{ await window.storage.set('activities_v2', JSON.stringify(activities), true); }catch(e){}
+}
+
+async function toggleLock(id){
+  const a = activities.find(x=>x.id===id);
+  if(!a) return;
+  a.confirmed = !a.confirmed;
+  renderActivities();
+  try{ await window.storage.set('activities_v2', JSON.stringify(activities), true); }catch(e){}
+}
+
+async function addActivity(){
+  const nameEl = document.getElementById('suggestName');
+  const name = nameEl.value.trim();
+  if(!name) return;
+  const cat = document.getElementById('suggestCat').value;
+  const id = 'custom_' + Date.now();
+  activities.push({id, name, cat, desc: myName ? `Suggested by ${myName}.` : 'Suggested by the group.', votes:[], confirmed:false});
+  nameEl.value = '';
+  renderActivities();
+  try{ await window.storage.set('activities_v2', JSON.stringify(activities), true); }catch(e){}
+}
+
+async function addToDay(id, dayKey){
+  if(!dayKey) return;
+  const a = activities.find(x=>x.id===id);
+  if(!a) return;
+  itinerary[dayKey].push({id:'item_'+Date.now(), time:'TBD', title:a.name, note:''});
+  renderItinerary();
+  try{ await window.storage.set('itinerary', JSON.stringify(itinerary), true); }catch(e){}
+  showTab('itinerary');
+}
+
+function renderItinerary(){
+  const cols = document.getElementById('dayCols');
+  cols.innerHTML = DAYS.map(d=>{
+    const items = itinerary[d.key] || [];
+    const rows = items.length ? items.map(it=>`
+      <div class="item-row">
+        <div class="item-time">${escapeHtml(it.time||'TBD')}</div>
+        <div class="item-body">
+          <div class="item-title">${escapeHtml(it.title)}</div>
+          ${it.note ? `<div class="item-note">${escapeHtml(it.note)}</div>` : ''}
+        </div>
+        <button class="item-del" onclick="deleteItem('${d.key}','${it.id}')">×</button>
+      </div>`).join('') : '<div class="empty-day">Nothing planned yet.</div>';
+    return `
+      <div class="day-col">
+        <h3>${d.label}</h3>
+        <div class="day-date">${d.date}</div>
+        ${rows}
+        <div class="add-item-form">
+          <input type="text" placeholder="Time (e.g. 2:00 PM)" id="time-${d.key}" />
+          <input type="text" placeholder="What's happening" id="title-${d.key}" />
+          <input type="text" placeholder="Note (optional)" id="note-${d.key}" />
+          <button onclick="addManualItem('${d.key}')">Add to ${d.label}</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+async function addManualItem(dayKey){
+  const title = document.getElementById('title-'+dayKey).value.trim();
+  if(!title) return;
+  const time = document.getElementById('time-'+dayKey).value.trim() || 'TBD';
+  const note = document.getElementById('note-'+dayKey).value.trim();
+  itinerary[dayKey].push({id:'item_'+Date.now(), time, title, note});
+  renderItinerary();
+  try{ await window.storage.set('itinerary', JSON.stringify(itinerary), true); }catch(e){}
+}
+
+async function deleteItem(dayKey, itemId){
+  itinerary[dayKey] = itinerary[dayKey].filter(it=>it.id!==itemId);
+  renderItinerary();
+  try{ await window.storage.set('itinerary', JSON.stringify(itinerary), true); }catch(e){}
+}
+
+function renderAttendees(){
+  const list = document.getElementById('attendeeList');
+  if(!attendees.length){
+    list.innerHTML = '<div class="loading-note">Nobody’s checked in yet — be the first.</div>';
+    return;
+  }
+  list.innerHTML = attendees.map(n=>`<div class="attendee-pill"><span class="dot"></span>${escapeHtml(n)}</div>`).join('');
+}
+
+/* ---------- Fable-powered features ---------- */
+const FABLE_MODEL = 'claude-fable-5';
+let chatHistory = [];
+
+function tripContext(){
+  const voted = activities
+    .filter(a=>a.votes.length>0 || a.confirmed)
+    .sort((a,b)=>b.votes.length-a.votes.length)
+    .map(a=>`- ${a.name} (${CATS[a.cat]?.label||a.cat}) — ${a.votes.length} votes${a.confirmed?' [LOCKED IN by group]':''}. ${a.dist?'Distance: '+a.dist+'. ':''}${a.when?'Recommended timing: '+a.when+'. ':''}${a.desc}`)
+    .join('\n') || '(no votes yet)';
+  const it = DAYS.map(d=>{
+    const items = (itinerary[d.key]||[]).map(i=>`  ${i.time} — ${i.title}${i.note?' ('+i.note+')':''}`).join('\n');
+    return `${d.label} ${d.date}:\n${items||'  (empty)'}`;
+  }).join('\n');
+  return `TRIP: Bachelor party for 12 guys. Lodging: either an Airbnb house near the resort (\$2,000 total / 3 nights, ~\$167pp) or Grand Cascades Lodge on property (~\$450-600/room/night). Home base either way is Crystal Springs Resort, Hamburg/Vernon NJ (Sussex County). Fri Aug 14 – Sun Aug 16, 2026. On property: Wild Turkey GC (best course, #1 pick), Crystal Springs GC (toughest), Black Bear GC 10 min away, Minerals casual 9-hole — do NOT suggest Ballyowen, the group excluded it. Also on property: 2 spas, firepits, archery/laser clay, Restaurant Latour. Nearby: Mountain Creek zipline & waterpark (10 min), Skydive Sussex (15 min), Stairway to Heaven hike (10 min), breweries (20-25 min), ATV tours (45-60 min), Delaware Water Gap tubing (40 min). Respect each activity's listed recommended timing when scheduling.\n\nGROUP VOTES SO FAR:\n${voted}\n\nCURRENT ITINERARY:\n${it}`;
+}
+
+async function callFable(messages, maxTokens){
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:FABLE_MODEL, max_tokens:1000, messages})
+  });
+  const data = await response.json();
+  if(data.error) throw new Error(data.error.message||'API error');
+  return data.content.filter(b=>b.type==='text').map(b=>b.text).join('\n');
+}
+
+async function generateItinerary(){
+  const btn = document.getElementById('genBtn');
+  const status = document.getElementById('genStatus');
+  btn.disabled = true;
+  status.textContent = 'Drafting the weekend...';
+  try{
+    const prompt = `${tripContext()}
+
+You are planning this bachelor party weekend. Build a realistic 3-day itinerary that prioritizes activities by vote count (locked-in items MUST be included), sequences things sensibly (arrival Friday afternoon/evening; big activities Saturday; lighter recovery + checkout Sunday, done by ~3pm), and accounts for travel/booking realities (tee times in the morning, skydiving needs a reserved slot, waterpark is a half-day, spa is a good hangover-morning move).
+
+Respond ONLY with valid JSON, no markdown fences, no preamble, in exactly this shape:
+{"fri":[{"time":"4:00 PM","title":"...","note":"..."}],"sat":[...],"sun":[...]}
+Keep 3-6 items per day. Times as strings like "9:00 AM". Notes one short sentence each (booking tips, why it's slotted there).`;
+    const text = await callFable([{role:'user', content:prompt}]);
+    const clean = text.replace(/```json|```/g,'').trim();
+    const draft = JSON.parse(clean);
+    for(const d of ['fri','sat','sun']){
+      itinerary[d] = (draft[d]||[]).map(i=>({id:'item_'+Date.now()+Math.random().toString(36).slice(2,6), time:i.time||'TBD', title:i.title||'', note:i.note||''}));
+    }
+    renderItinerary();
+    try{ await window.storage.set('itinerary', JSON.stringify(itinerary), true); }catch(e){}
+    status.textContent = 'Draft ready — edit anything below.';
+  }catch(err){
+    console.error(err);
+    status.textContent = 'Something went wrong drafting — try again.';
+  }
+  btn.disabled = false;
+  setTimeout(()=>{status.textContent='';}, 5000);
+}
+
+async function askConcierge(){
+  const input = document.getElementById('chatInput');
+  const q = input.value.trim();
+  if(!q) return;
+  input.value = '';
+  const box = document.getElementById('chatBox');
+  box.insertAdjacentHTML('beforeend', `<div class="chat-msg user">${escapeHtml(q)}</div>`);
+  const thinkingEl = document.createElement('div');
+  thinkingEl.className = 'chat-msg thinking';
+  thinkingEl.textContent = 'Thinking...';
+  box.appendChild(thinkingEl);
+  box.scrollTop = box.scrollHeight;
+  document.getElementById('askBtn').disabled = true;
+
+  chatHistory.push({role:'user', content:q});
+  const messages = [
+    {role:'user', content:`You are the concierge for this trip. Context:\n\n${tripContext()}\n\nAnswer the group's questions conversationally and concretely — short, useful answers, like a sharp hotel concierge. First question: ${chatHistory[0].content}`},
+    ...chatHistory.slice(1).map(m=>({role:m.role, content:m.content}))
+  ];
+  try{
+    const answer = await callFable(messages);
+    chatHistory.push({role:'assistant', content:answer});
+    thinkingEl.remove();
+    box.insertAdjacentHTML('beforeend', `<div class="chat-msg ai">${escapeHtml(answer)}</div>`);
+  }catch(err){
+    thinkingEl.remove();
+    box.insertAdjacentHTML('beforeend', `<div class="chat-msg ai">Couldn't reach the concierge — try again in a second.</div>`);
+  }
+  box.scrollTop = box.scrollHeight;
+  document.getElementById('askBtn').disabled = false;
+}
+
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.innerText = str;
+  return d.innerHTML;
+}
+
+loadAll();
+</script>
+</body>
+</html>
