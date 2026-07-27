@@ -1,5 +1,158 @@
 {
-  "activities_v2": null,
+  "activities_v2": [
+    {
+      "id": "wildturkey",
+      "name": "#1 · Wild Turkey Golf Club",
+      "cat": "golf",
+      "dist": "On property — at Grand Cascades Lodge",
+      "when": "Best: Sat 8–9 AM tee times, ~4.5 hrs",
+      "desc": "The best course we can play staying here — 7,202 yds, top-10 ranked in NJ, and its par-3 7th over the lake quarry is rated the best par-3 in the state.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "csgc",
+      "name": "#2 · Crystal Springs Golf Club",
+      "cat": "golf",
+      "dist": "On property — at Grand Cascades Lodge",
+      "when": "Best: Sat or Sun AM, ~4.5 hrs",
+      "desc": "Golf Digest \"Top 50 Toughest in America\" — winds through a limestone quarry with big elevation changes. Bring extra balls.",
+      "votes": [
+        "aa"
+      ],
+      "confirmed": false
+    },
+    {
+      "id": "blackbear",
+      "name": "#3 · Black Bear Golf Club",
+      "cat": "golf",
+      "dist": "~5 mi / 10 min drive",
+      "when": "Best: Fri late-afternoon 9 or Sun AM",
+      "desc": "The friendliest 18 of the three — scenic, playable for all skill levels. Good pick if the group has a wide handicap spread.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "minerals9",
+      "name": "Minerals 9-Hole (casual round)",
+      "cat": "golf",
+      "dist": "~3 mi / 7 min drive",
+      "when": "Best: Fri arrival day, ~1.5–2 hrs",
+      "desc": "Robert Trent Jones executive 9 — a top-12 short course in America. Perfect low-stakes warmup with drinks.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "skydive",
+      "name": "Skydive Sussex",
+      "cat": "adrenaline",
+      "dist": "~8 mi / 15 min drive",
+      "when": "Best: Sat AM slot, book ahead, ~3 hrs total",
+      "desc": "14,500 ft jump — the highest skydive in the Northeast. Weather-dependent, so reserve early and have a backup.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "zipline",
+      "name": "Mountain Creek Zip Tour",
+      "cat": "adrenaline",
+      "dist": "~5 mi / 10 min drive",
+      "when": "Best: Sat or Sun afternoon, ~2.5 hrs",
+      "desc": "Ziplines up to 1,500 ft across the mountain, a suspension bridge, and a unimog ride back up.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "waterpark",
+      "name": "Mountain Creek Waterpark",
+      "cat": "chill",
+      "dist": "~5 mi / 10 min drive",
+      "when": "Best: Sat 11 AM–4 PM half-day",
+      "desc": "20+ slides, wave pool, and the Tarzan Swing free-fall for anyone recovering from Friday night.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "brewery",
+      "name": "Angry Erik / Krogh’s Brew Pub crawl",
+      "cat": "drink",
+      "dist": "~15 mi / 20–25 min drive",
+      "when": "Best: Fri or Sat 5–8 PM, need drivers",
+      "desc": "Closest craft stops — Angry Erik Brewing in Lafayette and Krogh’s brewpub on Lake Mohawk in Sparta.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "atv",
+      "name": "ATV Off-Road Tour",
+      "cat": "adrenaline",
+      "dist": "~45–60 min drive (Poconos area)",
+      "when": "Best: full Sat afternoon, ~4 hrs w/ drive",
+      "desc": "Guided ATV tour through backcountry trails — the farthest option, so only worth it as the day’s main event.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "tubing",
+      "name": "Delaware Water Gap river tubing",
+      "cat": "chill",
+      "dist": "~30 mi / 40 min drive",
+      "when": "Best: Sat or Sun 10 AM start, ~4 hrs w/ drive",
+      "desc": "Lazy float down the Delaware with a cooler. Slow-paced but a classic group move.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "archery",
+      "name": "Resort Archery & Laser Clay Shooting",
+      "cat": "games",
+      "dist": "On property — Ballyowen range",
+      "when": "Best: Fri 4–6 PM arrival activity",
+      "desc": "Included with the stay — easy competition to kick things off while everyone trickles in.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "hike",
+      "name": "Appalachian Trail — Stairway to Heaven",
+      "cat": "chill",
+      "dist": "~5 mi / 10 min drive",
+      "when": "Best: Sun 9–11 AM before checkout",
+      "desc": "Steep climb to Pinwheel Vista — the best view in Sussex County. About 2.5 hrs round trip.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "spa",
+      "name": "Reflections / Elements Spa Recovery",
+      "cat": "chill",
+      "dist": "On property",
+      "when": "Best: Sun 10 AM — the hangover slot",
+      "desc": "Two award-winning spas on property. Book treatments ahead; the pools and hot tubs need no reservation.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "latour",
+      "name": "Restaurant Latour Steak & Wine Night",
+      "cat": "drink",
+      "dist": "On property — Grand Cascades Lodge",
+      "when": "Best: Sat 7:30 PM, reserve now for 12",
+      "desc": "Fine-dining tasting menu with a 135,000-bottle wine cellar — the group’s big night.",
+      "votes": [],
+      "confirmed": false
+    },
+    {
+      "id": "bonfire",
+      "name": "Firepits — Cigars & S’mores",
+      "cat": "chill",
+      "dist": "On property",
+      "when": "Best: Fri & Sat 9 PM onward",
+      "desc": "Drinks, cigars, and s’mores at the resort firepits — the default nightcap, no reservation needed.",
+      "votes": [],
+      "confirmed": false
+    }
+  ],
   "itinerary": null,
   "attendees": [
     "aa"
